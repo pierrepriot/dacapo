@@ -1,0 +1,39 @@
+AddDefaultCharset ISO-8859-1
+
+RewriteEngine On
+
+# SEO
+#RewriteRule ^sitemap.php$     /sitemap.php [L]
+RewriteRule ^sitemap.xml$     /sitemap.php [L]
+RewriteRule ^robots.txt$      /robots.php [L]
+# duplicate content
+RewriteCond %{REQUEST_URI} content [NC]
+RewriteRule ^(.+)/index.php$     /$1/  [R=301,L]
+# verif
+RewriteRule ^google.+.html$      /google.html [L]
+
+
+# duplicate domains
+RewriteCond %{HTTP_HOST} ^mutuelle-viasante\.fr$ [NC]
+RewriteCond %{REQUEST_URI} !^google.+.html$ [NC]
+RewriteRule ^(.*)$ http://www.mutuelle-viasante.fr/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^viasante\.couleur-citron\.com$ [NC]
+RewriteCond %{REQUEST_URI} !^google.+.html$ [NC]
+RewriteRule ^(.*)$ http://www.mutuelle-viasante.fr/$1 [R=301,L]
+
+# cms pages modules
+RewriteRule ^content/([^/]+)/(.+)/([0-9]+)/.+/.*$      /content/$1/$2/index.php?id=$3 [L]
+
+# cms newsletter
+RewriteRule ^newsletter/([0-9]+)/([0-9]+)/(.+)$      /$3 [L]
+RewriteRule ^newsletter/([0-9]+)/([0-9]+)/$           / [L]
+
+# cms cdn
+RewriteRule ^(custom/img/[^/]+/cdn/.+)$              /backoffice/cms/utils/passthru.php?file=$1 [L]
+
+# dossier content
+RewriteRule ^content/$           /  [R=301,L]
+
+# video module
+# RewriteRule ^v/(.*)$ /backoffice/cms/utils/awsVideo.php?file=$1 [L]
