@@ -1,0 +1,3 @@
+AddDefaultCharset On
+
+php_value default_charset "ISO-8859-1"
