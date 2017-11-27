@@ -8,6 +8,9 @@ function genFactureForFamily($iFamille, $iSaison, $iTrim, $iYear=NULL){
 	if ($iYear==NULL){
 		$iYear=date('Y');
 	}
+
+        $oSaison = new dc_saison($iSaison);
+        $sSaison=$oSaison->get_nom();
 	
 	// chercher les inscriptions de la famille pour la saison
 	$sql = 'SELECT i.* FROM dc_inscription AS i, dc_eleve AS e, dc_formule AS f WHERE f.dc_nom NOT LIKE "%stage%" AND i.dc_formule = f.dc_id AND  i.dc_saison='.$iSaison.' AND i.dc_statut=4 AND i.dc_eleve = e.dc_id AND e.dc_famille = '.$iFamille.';';
@@ -66,8 +69,9 @@ function genFactureForFamily($iFamille, $iSaison, $iTrim, $iYear=NULL){
 		$oLigne->set_statut(4);
 	
 		$aLignes[]=$oLigne;
+		
+		$bReglee=0;
 	}
-	
 	
 	// sommer les inscriptions
 	$aEleves=array();
@@ -82,6 +86,9 @@ function genFactureForFamily($iFamille, $iSaison, $iTrim, $iYear=NULL){
 		$oLigne->set_famille($iFamille);
 		$fPrix = $oForm->get_tarif();
 		$sDesign = $oForm->get_nom().' '.$oElev->get_nom().' '.$oElev->get_prenom();
+		if(!preg_match('/carnet/msi', $oForm->get_nom())){
+			$sDesign .= ' - trimestre '.$iTrim.' '.$sSaison; 
+		}
 		if($oIns->get_quinzaine()=='1'){
 			$fPrix=$fPrix/2;
 			$sDesign.=' (par quinzaine)';
@@ -103,13 +110,15 @@ function genFactureForFamily($iFamille, $iSaison, $iTrim, $iYear=NULL){
 		$getter = 'get_t'.$iTrim.'ok';
 		if ($oIns->$getter()==0){
 			$bReglee=0;
+		}
+		
+		// calcul de la reduc
+		if($oIns->get_reduit()=='1'){
+			$iReduc=10;
 		}	
 	}
 	// calcul de la reduc
-	if($oIns->get_reduit()=='1'){
-		$iReduc=10;
-	}
-	elseif (count($aEleves)==1){
+	if (count($aEleves)==1){
 		$iReduc=0;
 	}
 	elseif (count($aEleves)==2){
@@ -144,7 +153,7 @@ function genFactureForFamily($iFamille, $iSaison, $iTrim, $iYear=NULL){
 		echo 'modification de facture existante<br />';
 	}
 	elseif ($aFact!=false       &&      count($aFact)==1){
-		die('facture existante<br />forcer la modification avec ?force=1');
+		die('facture existante<br />forcer la <a href="'.$_SERVER['REQUEST_URI'].'&amp;force=1">modification</a>');
 	}
 	else{//nouvelle facture
 		echo 'nouvelle facture<br />';

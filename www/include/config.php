@@ -310,8 +310,8 @@ define("DEF_LIB_INSCRIT_0", "inscrit newsletter");
 define("DEF_LITE_NEWSLETTER", "OFF"); // valeurs possibles : ON, OFF
 
 // MAIL
-define("DEF_MAIL_HOST", "80.247.235.90");
-define("DEF_MAIL_ENGINE", "sendmail");// valeurs possibles : sendmail, smtp
+define("DEF_MAIL_HOST", "192.168.0.1");
+define("DEF_MAIL_ENGINE", "smtp");// valeurs possibles : sendmail, smtp
 define("DEF_USEPHPMAILFUNCTION", "0"); // valeur : 0, 1 - default 0
 
 // TAILLE IMAGES

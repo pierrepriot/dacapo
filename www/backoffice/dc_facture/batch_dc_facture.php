@@ -7,8 +7,6 @@ if (is_file($_SERVER['DOCUMENT_ROOT'].'/include/bo/cms/prepend.'.$script))
 	require_once('include/bo/cms/prepend.'.$script);
 
 // fetch factures et lignes en statut 4
-$iSaison = DEF_DC_SAISON;
-
 if (is_get('id')){
 	$sql = 'SELECT f.* FROM dc_facture AS f WHERE  f.dc_id='.$_GET['id'].';';
 }
@@ -27,6 +25,12 @@ $aFam = dbGetObjectsFromRequete('dc_famille', $sql);
 
 foreach($aF as $kF => $oF){
    if(is_get('id')	||	((trim($oF->get_montant())!='')	&&	!is_file($_SERVER['DOCUMENT_ROOT'].'/tmp/'.$oF->get_designation().' Facture Da Capo.pdf'))){
+
+	//$iSaison = DEF_DC_SAISON;
+	$iSaison = $oF->get_saison();
+	$oSaison = new dc_saison($iSaison);
+	$sSaison=$oSaison->get_nom();
+
 	ob_start();
 
 	echo '<p align="center"><img src="http://www.dacapo.fr/wp-content/uploads/dacapo-signature.png" /></p>';
@@ -134,9 +138,9 @@ foreach($aF as $kF => $oF){
 	// envoi du mail
 	$aTrims=array('', 'premier', 'deuxi&egrave;me', 'troisi&egrave;me', 'stage');
 	$from = '"Da Capo" <tresorier@dacapo.fr>';
-	$sujet = 'Da Capo - facture '.html_entity_decode($aTrims[$oF->get_trim()]).' trimestre 2016/2017';
+	$sujet = 'Da Capo - facture '.html_entity_decode($aTrims[$oF->get_trim()]).' trimestre '.$sSaison;
 	$html = '<p>Bonjour,</p>
-		<p>Voici la facture correspondant au '.$aTrims[$oF->get_trim()].' trimestre 2016/2017.</p>
+		<p>Voici la facture correspondant au '.$aTrims[$oF->get_trim()].' trimestre '.$sSaison.'.</p>
 		<p>Bonne r&eacute;ception,<p>
 		<p>Pierre PRIOT<br />
 		<strong>Da Capo !</strong><br />
