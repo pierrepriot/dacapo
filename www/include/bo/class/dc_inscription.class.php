@@ -69,12 +69,12 @@ CREATE TABLE dc_inscription
 
 <item name="reduit" libelle="Tarif réduit" type="int" length="2" list="true" order="true" default="0" option="bool" />
 
-<item name="datedebut" libelle="Date de début" type="date" default="2014-09-15" list="true" order="true" />
-<item name="datefin" libelle="Date de fin" type="date" default="2015-06-26"  list="true" order="true" />
+<item name="datedebut" libelle="Date de début" type="date" default="2014-09-15" list="false" order="false" />
+<item name="datefin" libelle="Date de fin" type="date" default="2015-06-26"  list="false" order="false" />
 
-<item name="t1ok" libelle="Trimestre 1 payé" type="int" length="11" notnull="true" default="-1" list="true" order="true" option="bool" />
-<item name="t2ok" libelle="Trimestre 2 payé" type="int" length="11" notnull="true" default="-1" list="true" order="true" option="bool" />
-<item name="t3ok" libelle="Trimestre 3 payé" type="int" length="11" notnull="true" default="-1" list="true" order="true" option="bool" />
+<item name="t1ok" libelle="T 1 payé" type="int" length="11" notnull="true" default="-1" list="true" order="true" option="bool" />
+<item name="t2ok" libelle="T 2 payé" type="int" length="11" notnull="true" default="-1" list="true" order="true" option="bool" />
+<item name="t3ok" libelle="T 3 payé" type="int" length="11" notnull="true" default="-1" list="true" order="true" option="bool" />
 
 
 <item name="saison" libelle="Saison" type="int" length="11" list="true" order="true" default="DEF_DC_SAISON" fkey="dc_saison"/>
@@ -128,12 +128,12 @@ var $XML = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>
 
 <item name=\"reduit\" libelle=\"Tarif réduit\" type=\"int\" length=\"2\" list=\"true\" order=\"true\" default=\"0\" option=\"bool\" />
 
-<item name=\"datedebut\" libelle=\"Date de début\" type=\"date\" default=\"2014-09-15\" list=\"true\" order=\"true\" />
-<item name=\"datefin\" libelle=\"Date de fin\" type=\"date\" default=\"2015-06-26\"  list=\"true\" order=\"true\" />
+<item name=\"datedebut\" libelle=\"Date de début\" type=\"date\" default=\"2014-09-15\" list=\"false\" order=\"false\" />
+<item name=\"datefin\" libelle=\"Date de fin\" type=\"date\" default=\"2015-06-26\"  list=\"false\" order=\"false\" />
 
-<item name=\"t1ok\" libelle=\"Trimestre 1 payé\" type=\"int\" length=\"11\" notnull=\"true\" default=\"-1\" list=\"true\" order=\"true\" option=\"bool\" />
-<item name=\"t2ok\" libelle=\"Trimestre 2 payé\" type=\"int\" length=\"11\" notnull=\"true\" default=\"-1\" list=\"true\" order=\"true\" option=\"bool\" />
-<item name=\"t3ok\" libelle=\"Trimestre 3 payé\" type=\"int\" length=\"11\" notnull=\"true\" default=\"-1\" list=\"true\" order=\"true\" option=\"bool\" />
+<item name=\"t1ok\" libelle=\"T 1 payé\" type=\"int\" length=\"11\" notnull=\"true\" default=\"-1\" list=\"true\" order=\"true\" option=\"bool\" />
+<item name=\"t2ok\" libelle=\"T 2 payé\" type=\"int\" length=\"11\" notnull=\"true\" default=\"-1\" list=\"true\" order=\"true\" option=\"bool\" />
+<item name=\"t3ok\" libelle=\"T 3 payé\" type=\"int\" length=\"11\" notnull=\"true\" default=\"-1\" list=\"true\" order=\"true\" option=\"bool\" />
 
 
 <item name=\"saison\" libelle=\"Saison\" type=\"int\" length=\"11\" list=\"true\" order=\"true\" default=\"DEF_DC_SAISON\" fkey=\"dc_saison\"/>
